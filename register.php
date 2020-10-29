@@ -45,6 +45,7 @@
 	?>
 	<form action="register.php" method="post">
 		<table>
+<fieldset>
 			<tr>
 				<td colspan="2">Form dang ky</td>
 			</tr>	
@@ -67,9 +68,10 @@
 			<tr>
 				<td colspan="2" align="center"><input type="submit" name="btn_submit" value="Dang ky"></td>
 			</tr>
-
+<p>Already have an account? <a href="login.php">Login here</a>.</p>
 		</table>
-  <p>Already have an account? <a href="login.php">Login here</a>.</p>
+</fieldset>
+  
 	</form>
 	</body>
 	</html>

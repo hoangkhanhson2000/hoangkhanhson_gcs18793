@@ -51,8 +51,9 @@ session_start();
 	    			<td colspan="2" align="center"> <input name="btn_submit" type="submit" value="Đăng nhập"></td>
 	    		</tr>
 	    	</table>
-  </fieldset>
 <p>Don't have an account? <a href="register.php">Sign up now</a>.</p>
+  </fieldset>
+
   </form>
 </body>
 </html>
