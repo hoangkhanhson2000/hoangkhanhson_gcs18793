@@ -27,10 +27,9 @@ session_start();
 			else{
 				$msg ="no name in our database";
 				}
-				pg_close($db);
-				}
+				
  		}
-		
+	}
 	
 ?>
 	<form method="POST" action="login.php">
