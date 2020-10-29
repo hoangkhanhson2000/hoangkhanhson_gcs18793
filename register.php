@@ -8,11 +8,11 @@
 		if (isset($_POST["btn_submit"])) {
   			//lấy thông tin từ các form bằng phương thức POST
   			$username = $_POST["username"];
-  			$password = $_POST["pass"];
- 			$name = $_POST["name"];
+  			$passwordd = $_POST["passwordd"];
+ 			$name = $_POST["namee"];
   			$email = $_POST["email"];
   			//Kiểm tra điều kiện bắt buộc đối với các field không được bỏ trống
-			  if ($username == "" || $password == "" || $name == "" || $email == "") {
+			  if ($username == "" || $passwordd == "" || $namee == "" || $email == "") {
 				   echo "bạn vui lòng nhập đầy đủ thông tin";
   			}else{
   					// Kiểm tra tài khoản đã tồn tại chưa
@@ -23,10 +23,10 @@
 						echo "Tài khoản đã tồn tại";
 					}else{
 						//thực hiện việc lưu trữ dữ liệu vào db
-	    				$sql = "INSERT INTO Account(
+	    				$query = "INSERT INTO Account(
 	    					username,
-	    					password,
-	    					name,
+	    					passwordd,
+	    					namee,
 						    email
 	    					) VALUES (
 	    					'$username',

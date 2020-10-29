@@ -14,11 +14,11 @@ session_start();
 	if (isset($_POST["btn_submit"])) {
 		// lấy thông tin người dùng
 		$username = $_POST["username"];
-		$password = $_POST["password"];
+		$password = $_POST["passwordd"];
 		//làm sạch thông tin, xóa bỏ các tag html, ký tự đặc biệt 
 		//mà người dùng cố tình thêm vào để tấn công theo phương thức sql injection
 	
-		if ($username == "" || $password =="") {
+		if ($username == "" || $passwordd =="") {
 			echo "username hoặc password bạn không được để trống!";
 		}else{
 			$query = "SELECT * FROM Account WHERE username = $username";
