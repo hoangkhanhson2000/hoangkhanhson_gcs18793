@@ -24,13 +24,9 @@ session_start();
 			if ($db_passwordd ==$passwordd) {
 					$msg = "Login sucess";
 			}
-			else{
-				$msg ="no name in our database";
-				}
-				
- 		}
+		}
+		}
 	}
-	
 ?>
 	<form method="POST" action="login.php">
 	<fieldset>
@@ -47,7 +43,6 @@ session_start();
 	    		<tr>
 	    			<td colspan="2" align="center"> <input name="btn_submit" type="submit" value="Đăng nhập"></td>
 	    		</tr>
-				 <p>Don't have an account? <a href="register.php">Sign up now</a>.</p>
 	    	</table>
   </fieldset>
   </form>
