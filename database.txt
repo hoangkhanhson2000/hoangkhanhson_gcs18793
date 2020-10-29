@@ -1,0 +1,5 @@
+DROP TABLE ACCOUNT;
+CREATE TABLE ACCOUNT (username varchar (50) primary key, password varchar (50), name varchar(255) NOT NULL, email varchar(255) NOT NULL,;
+insert into account (name, password) value (son, 123456 ,hoang khanh son, hoangkhanhson2000@gmail.com);
+
+heroku pg:psql postgresql-transparent-13575 --app hoangkhanhson2000-gcs18793

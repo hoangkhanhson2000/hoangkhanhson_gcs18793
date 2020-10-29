@@ -1,124 +1,57 @@
 <?php
-// Initialize the session
 session_start();
- 
-// Check if the user is already logged in, if yes then redirect him to welcome page
-if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true){
-  header("location: index.php");
-  exit;
-}
- 
-// Include config file
-require_once "config.php";
- 
-// Define variables and initialize with empty values
-$username = $password = "";
-$username_err = $password_err = "";
- 
-// Processing form data when form is submitted
-if($_SERVER["REQUEST_METHOD"] == "POST"){
- 
-    // Check if username is empty
-    if(empty(trim($_POST["username"]))){
-        $username_err = "Please enter username.";
-    } else{
-        $username = trim($_POST["username"]);
-    }
-    
-    // Check if password is empty
-    if(empty(trim($_POST["password"]))){
-        $password_err = "Please enter your password.";
-    } else{
-        $password = trim($_POST["password"]);
-    }
-    
-    // Validate credentials
-    if(empty($username_err) && empty($password_err)){
-        // Prepare a select statement
-        $sql = "SELECT id, username, password FROM users WHERE username = ?";
-        
-        if($stmt = pg_prepare($link, $sql)){
-            // Bind variables to the prepared statement as parameters
-            pg_stmt_bind_param($stmt, "s", $param_username);
-            
-            // Set parameters
-            $param_username = $username;
-            
-            // Attempt to execute the prepared statement
-            if(pg_stmt_execute($stmt)){
-                // Store result
-                pg_stmt_store_result($stmt);
-                
-                // Check if username exists, if yes then verify password
-                if(pg_stmt_num_rows($stmt) == 1){                    
-                    // Bind result variables
-                    pg_stmt_bind_result($stmt, $id, $username, $hashed_password);
-                    if(pg_stmt_fetch($stmt)){
-                        if(password_verify($password, $hashed_password)){
-                            // Password is correct, so start a new session
-                            session_start();
-                            
-                            // Store data in session variables
-                            $_SESSION["loggedin"] = true;
-                            $_SESSION["id"] = $id;
-                            $_SESSION["username"] = $username;                            
-                            
-                            // Redirect user to welcome page
-                            header("location: welcome.php");
-                        } else{
-                            // Display an error message if password is not valid
-                            $password_err = "The password you entered was not valid.";
-                        }
-                    }
-                } else{
-                    // Display an error message if username doesn't exist
-                    $username_err = "No account found with that username.";
-                }
-            } else{
-                echo "Oops! Something went wrong. Please try again later.";
-            }
-
-            // Close statement
-            pg_stmt_close($stmt);
-        }
-    }
-    
-    // Close connection
-    pg_close($link);
-}
 ?>
- 
-<!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <title>Login</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.css">
-    <style type="text/css">
-        body{ font: 14px sans-serif; }
-        .wrapper{ width: 350px; padding: 20px; }
-    </style>
+	<title>Trang đăng nhập</title>
+	<meta charset="utf-8">
 </head>
 <body>
-    <div class="wrapper">
-        <h2>Login</h2>
-        <p>Please fill in your credentials to login.</p>
-        <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
-            <div class="form-group <?php echo (!empty($username_err)) ? 'has-error' : ''; ?>">
-                <label>Username</label>
-                <input type="text" name="username" class="form-control" value="<?php echo $username; ?>">
-                <span class="help-block"><?php echo $username_err; ?></span>
-            </div>    
-            <div class="form-group <?php echo (!empty($password_err)) ? 'has-error' : ''; ?>">
-                <label>Password</label>
-                <input type="password" name="password" class="form-control">
-                <span class="help-block"><?php echo $password_err; ?></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" class="btn btn-primary" value="Login">
-            </div>
-            <p>Don't have an account? <a href="register.php">Sign up now</a>.</p>
-        </form>
-    </div>    
+<?php
+	//Gọi file connection.php ở bài trước
+	require_once("config.php");
+	// Kiểm tra nếu người dùng đã ân nút đăng nhập thì mới xử lý
+	if (isset($_POST["btn_submit"])) {
+		// lấy thông tin người dùng
+		$username = $_POST["username"];
+		$password = $_POST["password"];
+		//làm sạch thông tin, xóa bỏ các tag html, ký tự đặc biệt 
+		//mà người dùng cố tình thêm vào để tấn công theo phương thức sql injection
+	
+		if ($username == "" || $password =="") {
+			echo "username hoặc password bạn không được để trống!";
+		}else{
+			$query = "SELECT * FROM Account WHERE username = $username";
+			$result = pg_query($query);
+			if ($result==0) {
+				echo "tên đăng nhập hoặc mật khẩu không đúng !";
+			}else{
+				//tiến hành lưu tên đăng nhập vào session để tiện xử lý sau này
+				$_SESSION['username'] = $username;
+                // Thực thi hành động sau khi lưu thông tin vào session
+                // ở đây mình tiến hành chuyển hướng trang web tới một trang gọi là index.php
+                header('Location: index.php');
+			}
+		}
+	}
+?>
+	<form method="POST" action="login.php">
+	<fieldset>
+	    <legend>Đăng nhập</legend>
+	    	<table>
+	    		<tr>
+	    			<td>Username</td>
+	    			<td><input type="text" name="username" size="30"></td>
+	    		</tr>
+	    		<tr>
+	    			<td>Password</td>
+	    			<td><input type="password" name="password" size="30"></td>
+	    		</tr>
+	    		<tr>
+	    			<td colspan="2" align="center"> <input name="btn_submit" type="submit" value="Đăng nhập"></td>
+	    		</tr>
+	    	</table>
+  </fieldset>
+  </form>
 </body>
 </html>
