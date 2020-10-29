@@ -3,7 +3,7 @@ session_start();
 ?>
 <html>
 <head>
-	<title>Trang đăng nhập</title>
+	<title>LOGIN PAGE</title>
 	<meta charset="utf-8">
 </head>
 <body>
@@ -37,7 +37,7 @@ session_start();
 ?>
 	<form method="POST" action="login.php">
 	<fieldset>
-	    <legend>Đăng nhập</legend>
+	    <legend>Login</legend>
 	    	<table>
 	    		<tr>
 	    			<td>Username</td>
@@ -52,6 +52,7 @@ session_start();
 	    		</tr>
 	    	</table>
   </fieldset>
+<p>Don't have an account? <a href="register.php">Sign up now</a>.</p>
   </form>
 </body>
 </html>
