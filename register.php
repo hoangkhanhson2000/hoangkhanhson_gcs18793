@@ -48,29 +48,30 @@
 		<table>
 
 			<tr>
-				<td colspan="2">Form dang ky</td>
+				<td colspan="2">Register Form</td>
 			</tr>	
 			<tr>
 				<td>Username :</td>
-				<td><input type="text" id="username" name="username"></td>
+				<td><input type="text" id="username" name="username" size="30"></td>
 			</tr>
 			<tr>
 				<td>Password :</td>
-				<td><input type="password" id="pass" name="pass"></td>
+				<td><input type="password" id="pass" name="pass" size="30"></td>
 			</tr>
 			<tr>
-				<td>Ho Ten :</td>
-				<td><input type="text" id="name" name="name"></td>
+				<td>Name :</td>
+				<td><input type="text" id="name" name="name" size="30"></td>
 			</tr>
 			<tr>
 				<td>Email :</td>
-				<td><input type="text" id="email" name="email"></td>
+				<td><input type="text" id="email" name="email" size="30"></td>
 			</tr>
 			<tr>
-				<td colspan="2" align="center"><input type="submit" name="btn_submit" value="Dang ky"></td>
+				<td colspan="2" align="center"><input type="submit" name="btn_submit" value="Sign Up"></td>
 			</tr>
-<p>Already have an account? <a href="login.php">Login here</a>.</p>
+
 		</table>
+<p>Already have an account? <a href="login.php">Login here</a>.</p>
 </fieldset>
   
 	</form>
