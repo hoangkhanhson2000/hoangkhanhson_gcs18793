@@ -1,50 +1,40 @@
 <html>
 	<head>
-		<title>kungfuphp - Form đăng ký thành viên</title>
+		<title>Register Page</title>
 	</head>
 	<body>
-		<?php
-		require_once("config.php");
-		if (isset($_POST["btn_submit"])) {
-  			//lấy thông tin từ các form bằng phương thức POST
-  			$username = $_POST["username"];
-  			$passwordd = $_POST["passwordd"];
- 			$name = $_POST["namee"];
-  			$email = $_POST["email"];
-  			//Kiểm tra điều kiện bắt buộc đối với các field không được bỏ trống
-			  if ($username == "" || $passwordd == "" || $namee == "" || $email == "") {
-				   echo "bạn vui lòng nhập đầy đủ thông tin";
-  			}else{
-  					// Kiểm tra tài khoản đã tồn tại chưa
-  					$query="SELECT * from users where username='$username'";
-					$check=pg_query($query);
-
-					if(pg_query($check)  > 0){
-						echo "Tài khoản đã tồn tại";
-					}else{
-						//thực hiện việc lưu trữ dữ liệu vào db
-	    				$query = "INSERT INTO Account(
-	    					username,
-	    					passwordd,
-	    					namee,
-						    email
-	    					) VALUES (
-	    					'$username',
-	    					'$password',
-						    '$name',
-	    					'$email'
-	    					)";
-					    // thực thi câu $sql với biến conn lấy từ file connection.php
-   						pg_query($query);
-				   		echo "chúc mừng bạn đã đăng ký thành công";
-					}
-									    
-					
-			  }
+	<?php
+	if (isset($_POST["btn_submit"])) {
+		//lấy thông tin từ các form bằng phương thức POST
+		$username = $_POST["username"];
+		$passwordd = $_POST["passwordd"];
+		$namee = $_POST["namee"];
+		$email = $_POST["email"];
+		//Kiểm tra điều kiện bắt buộc đối với các field không được bỏ trống
+		if ($username == "" || $password == "" || $name == "" || $email == "") {
+			echo "bạn vui lòng nhập đầy đủ thông tin";
+		}else{
+			$sql = "INSERT INTO users(
+										username,
+										passwordd,
+										namee,
+										email
+									) VALUES (
+										'$username',
+										'$passwordd',
+										'$namee',
+										'$email'
+									)";
+			// thực thi câu $sql với biến conn lấy từ file connection.php
+			pg_query($link,$sql);
+			echo "chúc mừng bạn đã đăng ký thành công";
+		}
 	}
-	?>
+
+?>
 	<form action="register.php" method="POST">
 <fieldset>
+<legend>Register</legend>
 		<table>
 
 			<tr>
