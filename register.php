@@ -43,9 +43,10 @@
 			  }
 	}
 	?>
-	<form action="register.php" method="post">
-		<table>
+	<form action="register.php" method="POST">
 <fieldset>
+		<table>
+
 			<tr>
 				<td colspan="2">Form dang ky</td>
 			</tr>	
