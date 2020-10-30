@@ -6,8 +6,8 @@
 	<?php
 	if (isset($_POST["btn_submit"])) {
 		$username = $_POST["username"];
-		$passwordd = $_POST["password"];
-		$named = $_POST["name"];
+		$passwordd = $_POST["passwordd"];
+		$named = $_POST["named"];
 		$email = $_POST["email"];
 		if ($username == "" || $passwordd == "" || $named == "" || $email == "") {
 			echo "bạn vui lòng nhập đầy đủ thông tin";
@@ -44,11 +44,11 @@ pg_close($link);
 			</tr>
 			<tr>
 				<td>Password :</td>
-				<td><input type="password" id="pass" name="pass" size="30"></td>
+				<td><input type="password" id="pass" name="passwordd" size="30"></td>
 			</tr>
 			<tr>
 				<td>Name :</td>
-				<td><input type="text" id="name" name="name" size="30"></td>
+				<td><input type="text" id="name" name="named" size="30"></td>
 			</tr>
 			<tr>
 				<td>Email :</td>
