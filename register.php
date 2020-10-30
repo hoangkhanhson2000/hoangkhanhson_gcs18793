@@ -7,22 +7,22 @@
 	if (isset($_POST["btn_submit"])) {
 		//lấy thông tin từ các form bằng phương thức POST
 		$username = $_POST["username"];
-		$passwordd = $_POST["passwordd"];
-		$namee = $_POST["namee"];
+		$passwordd = $_POST["password"];
+		$named = $_POST["name"];
 		$email = $_POST["email"];
 		//Kiểm tra điều kiện bắt buộc đối với các field không được bỏ trống
 		if ($username == "" || $password == "" || $name == "" || $email == "") {
 			echo "bạn vui lòng nhập đầy đủ thông tin";
 		}else{
-			$sql = "INSERT INTO users(
+			$sql = "INSERT INTO Account(
 										username,
 										passwordd,
-										namee,
+										named,
 										email
 									) VALUES (
 										'$username',
 										'$passwordd',
-										'$namee',
+										'$named',
 										'$email'
 									)";
 			// thực thi câu $sql với biến conn lấy từ file connection.php
@@ -30,7 +30,7 @@
 			echo "chúc mừng bạn đã đăng ký thành công";
 		}
 	}
-
+pg_close($link);
 ?>
 	<form action="register.php" method="POST">
 <fieldset>

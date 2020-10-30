@@ -14,17 +14,17 @@ session_start();
 	if (isset($_POST["btn_submit"])) {
 		// lấy thông tin người dùng
 		$username = $_POST["username"];
-		$passwordd = $_POST["passwordd"];
+		$passwordd = $_POST["password"];
 		//làm sạch thông tin, xóa bỏ các tag html, ký tự đặc biệt 
 		//mà người dùng cố tình thêm vào để tấn công theo phương thức sql injection
 		$username = strip_tags($username);
 		$username = addslashes($username);
-		$passwordd = strip_tags($passwordd);
-		$passwordd = addslashes($passwordd);
+		$passwordd = strip_tags($password);
+		$passwordd = addslashes($password);
 		if ($username == "" || $password =="") {
 			echo "username hoặc password bạn không được để trống!";
 		}else{
-			$sql = "SELECT * from users where username = '$username' and passwordd = '$passwordd' ";
+			$sql = "SELECT * FROM Account WHERE username = '$username' and password = '$passwordd'";
 			$query = pg_query($link,$sql);
 			$num_rows = pg_num_rows($query);
 			if ($num_rows==0) {
@@ -38,6 +38,7 @@ session_start();
 			}
 		}
 	}
+	pg_close($link);
 ?>
 	<form method="POST" action="login.php">
 	<fieldset>
@@ -54,8 +55,9 @@ session_start();
 	    		<tr>
 	    			<td colspan="2" align="center"> <input name="btn_submit" type="submit" value="Đăng nhập"></td>
 	    		</tr>
-				<p>Don't have an account? <a href="register.php">Sign up now</a>.</p>
+				
 	    	</table>
+			<p>Don't have an account? <a href="register.php">Sign up now</a>.</p>
   </fieldset>
   </form>
 </body>
