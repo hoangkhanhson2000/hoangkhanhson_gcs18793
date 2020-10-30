@@ -21,7 +21,6 @@ session_start();
 		if ($link) {
 			$query="SELECT *FROM Account WHERE username=$username";
 			$result = pg_query($query);
-		$sql = "SELECT * from Account where username = '$username' and passwordd = '$password' ";
 		$query = pg_query($link,$sql);
 		if ($result) {
 			$link_password =pg_result ($result, 0, "password");
