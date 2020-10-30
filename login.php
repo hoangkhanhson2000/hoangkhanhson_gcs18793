@@ -8,30 +8,33 @@ session_start();
 </head>
 <body>
 <?php
-
+	//Gọi file connection.php ở bài trước
 	require_once("config.php");
-	
+	// Kiểm tra nếu người dùng đã ân nút đăng nhập thì mới xử lý
 	if (isset($_POST["btn_submit"])) {
-		
+		// lấy thông tin người dùng
 		$username = $_POST["username"];
-		$passwordd = $_POST["passwordd"];
-		
-		if ($username == "" || $password =="") {
-			echo "username hoặc password bạn không được để trống!";
-		}else{
-			$sql = "SELECT * FROM Account WHERE username = '$username' and passwordd = '$passwordd'";
-			$query = pg_query($link,$sql);
+		$password = $_POST["password"];
+		$msg='';
+		//làm sạch thông tin, xóa bỏ các tag html, ký tự đặc biệt 
+		//mà người dùng cố tình thêm vào để tấn công theo phương thức sql injection
+		if ($link) {
+			$query="SELECT *FROM Account WHERE username=$username";
 			$result = pg_query($query);
-			if ($result) {
-				$link_password = pg_result($result, 0, "password");
-				if ($link_passwordd == $passwordd) 
-				{
-					$_SESSION['username'] = $username;
-					header('Location: index.php');
-			}else{
-				echo "no name in our database";
-			}
-		}
+		$sql = "SELECT * from Account where username = '$username' and passwordd = '$password' ";
+		$query = pg_query($link,$sql);
+		if ($result) {
+			$link_password =pg_result ($result, 0, "password");
+			if ($link_password ==$password) {
+				$msg = "Login sucess";
+				}
+				}
+				else{
+				$msg ="no name in our database";
+				}
+				pg_close($link);
+				}
+				echo $msg;
 	}
 	pg_close($link);
 ?>
@@ -45,7 +48,7 @@ session_start();
 	    		</tr>
 	    		<tr>
 	    			<td>Password</td>
-	    			<td><input type="password" name="passwordd" size="30"></td>
+	    			<td><input type="password" name="password" size="30"></td>
 	    		</tr>
 	    		<tr>
 	    			<td colspan="2" align="center"> <input name="btn_submit" type="submit" value="Đăng nhập"></td>
