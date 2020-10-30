@@ -8,7 +8,7 @@ session_start();
 </head>
 <body>
 <?php
-	
+
 	require_once("config.php");
 	
 	if (isset($_POST["btn_submit"])) {
@@ -16,18 +16,20 @@ session_start();
 		$username = $_POST["username"];
 		$passwordd = $_POST["passwordd"];
 		
-		if ($username == "" || $passwordd =="") {
+		if ($username == "" || $password =="") {
 			echo "username hoặc password bạn không được để trống!";
 		}else{
 			$sql = "SELECT * FROM Account WHERE username = '$username' and passwordd = '$passwordd'";
 			$query = pg_query($link,$sql);
-			$num_rows = pg_num_rows($query);
-			if ($num_rows==0) {
-				echo "tên đăng nhập hoặc mật khẩu không đúng !";
+			$result = pg_query($query);
+			if ($result) {
+				$link_password = pg_result($result, 0, "password");
+				if ($link_passwordd == $passwordd) 
+				{
+					$_SESSION['username'] = $username;
+					header('Location: index.php');
 			}else{
-				$_SESSION['username'] = $username;
-              
-                header('Location: index.php');
+				echo "no name in our database";
 			}
 		}
 	}
