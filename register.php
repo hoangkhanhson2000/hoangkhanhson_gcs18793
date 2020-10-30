@@ -12,7 +12,7 @@
 		if ($username == "" || $passwordd == "" || $named == "" || $email == "") {
 			echo "bạn vui lòng nhập đầy đủ thông tin";
 		}else{
-			$sql = "INSERT INTO Account(
+			$query = "INSERT INTO account(
 										username,
 										passwordd,
 										named,
@@ -23,7 +23,6 @@
 										'$named',
 										'$email'
 									)";
-			// thực thi câu $sql với biến conn lấy từ file connection.php
 			pg_query($link,$sql);
 			echo "chúc mừng bạn đã đăng ký thành công";
 		}
