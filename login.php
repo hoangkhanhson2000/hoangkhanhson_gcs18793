@@ -16,7 +16,7 @@ session_start();
 		$username = $_POST["username"];
 		$passwordd = $_POST["password"];
 		
-		if ($username == "" || $password =="") {
+		if ($username == "" || $passwordd =="") {
 			echo "username hoặc password bạn không được để trống!";
 		}else{
 			$sql = "SELECT * FROM Account WHERE username = '$username' and password = '$passwordd'";
