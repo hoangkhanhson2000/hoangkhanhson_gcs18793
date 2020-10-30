@@ -14,12 +14,12 @@ session_start();
 	if (isset($_POST["btn_submit"])) {
 		
 		$username = $_POST["username"];
-		$passwordd = $_POST["password"];
+		$passwordd = $_POST["passwordd"];
 		
 		if ($username == "" || $passwordd =="") {
 			echo "username hoặc password bạn không được để trống!";
 		}else{
-			$sql = "SELECT * FROM Account WHERE username = '$username' and password = '$passwordd'";
+			$sql = "SELECT * FROM Account WHERE username = '$username' and passwordd = '$passwordd'";
 			$query = pg_query($link,$sql);
 			$num_rows = pg_num_rows($query);
 			if ($num_rows==0) {
@@ -43,7 +43,7 @@ session_start();
 	    		</tr>
 	    		<tr>
 	    			<td>Password</td>
-	    			<td><input type="password" name="password" size="30"></td>
+	    			<td><input type="password" name="passwordd" size="30"></td>
 	    		</tr>
 	    		<tr>
 	    			<td colspan="2" align="center"> <input name="btn_submit" type="submit" value="Đăng nhập"></td>
