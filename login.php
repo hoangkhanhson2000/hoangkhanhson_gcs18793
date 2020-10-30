@@ -12,11 +12,8 @@ session_start();
 	require_once("config.php");
 
 	if (isset($_POST["btn_submit"])) {
-		
 		$username = $_POST["username"];
 		$password = $_POST["password"];
-		$link = pg_connect("host=".DB_SERVER." dbname=". DB_NAME ." user=" . DB_USERNAME . " password=" .DB_PASSWORD. "")
-		or die('Could not connect1: ' . pg_last_error());
 		$query="SELECT *FROM account WHERE username = $username";
 		$result = pg_query($query);
 		if ($result) {
@@ -33,8 +30,6 @@ session_start();
 				pg_close($link);
 				}
 				echo $msg;
-	}
-	pg_close($link);
 ?>
 	<form method="POST" action="login.php">
 	<fieldset>
