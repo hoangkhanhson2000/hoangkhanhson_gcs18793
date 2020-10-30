@@ -8,24 +8,23 @@ session_start();
 </head>
 <body>
 <?php
-	//Gọi file connection.php ở bài trước
+	
 	require_once("config.php");
-	// Kiểm tra nếu người dùng đã ân nút đăng nhập thì mới xử lý
+
 	if (isset($_POST["btn_submit"])) {
-		// lấy thông tin người dùng
+		
 		$username = $_POST["username"];
 		$password = $_POST["password"];
-		$msg='';
-		//làm sạch thông tin, xóa bỏ các tag html, ký tự đặc biệt 
-		//mà người dùng cố tình thêm vào để tấn công theo phương thức sql injection
-		if ($link) {
-			$query="SELECT *FROM Account WHERE username=$username";
-			$result = pg_query($query);
-		$query = pg_query($link,$sql);
+		$link = pg_connect("host=".DB_SERVER." dbname=". DB_NAME ." user=" . DB_USERNAME . " password=" .DB_PASSWORD. "")
+		or die('Could not connect1: ' . pg_last_error());
+		$query="SELECT *FROM account WHERE username = $username";
+		$result = pg_query($query);
 		if ($result) {
 			$link_password =pg_result ($result, 0, "password");
-			if ($link_password ==$password) {
+			if ($link_password == $password) {
 				$msg = "Login sucess";
+				$_SESSION['username'] = $username;
+				header('Location: index.php');
 				}
 				}
 				else{
