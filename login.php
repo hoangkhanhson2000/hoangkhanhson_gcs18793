@@ -6,7 +6,35 @@
    
    <body>
       <h3 style="text-align: center;">LOGIN</h3>
-      
+      <?php
+// By this way, you only enter the connection information once.
+include('connect_db.php');
+$db = getDB();
+
+$username = $_POST['username'];
+$password = $_POST['password'];
+$success = 0;
+
+if ($db) {
+   $query = "SELECT * FROM account WHERE username='$username'";
+   $result = pg_query($query);
+
+   if ($result) {
+      $db_password = pg_result($result, 0, "password");
+
+      // Decrypt the password and then compare.
+      if(password_verify($password, $db_password)) {
+         $success = 1;
+      }
+   }
+   
+   pg_close($db);
+}
+
+$data = array('success' => $success, 'username' => $username);
+
+echo json_encode($data);
+?>
       <form id="frm-login">
          <table style="margin-left: auto; margin-right: auto;">
             <tr>
