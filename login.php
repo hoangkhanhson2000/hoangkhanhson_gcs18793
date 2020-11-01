@@ -32,7 +32,6 @@ if ($db) {
 }
 
 $data = array('success' => $success, 'username' => $username);
-
 echo json_encode($data);
 ?>
       <form id="frm-login">
