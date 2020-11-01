@@ -24,12 +24,12 @@ if ($db) {
                                                   password TEXT NOT NULL,
                                                   firstname VARCHAR(50),
                                                   lastname VARCHAR(50),
-                                                  age INTEGER NOT NULL)';
+                                                  age INTEGER NOT NULL);';
     pg_query($query);
 
     if( isset($username) && isset($password) && isset($age) ) {
         $query = "INSERT INTO account (username, password, firstname, lastname, age)
-                  VALUES ('$username', '$password', '$firstname', '$lastname', $age)";
+                  VALUES ('$username', '$password', '$firstname', '$lastname', $age);";
         pg_query($query);
         $success = 1;
     }
@@ -74,7 +74,7 @@ echo json_encode(array('success' => $success));
          </table>
       </form>
 
-      <p style="text-align: center;"><a href="login.php" rel="external">&larr; Back to Login page</a></p>
+      <p style="text-align: center;"><a href="login.html" rel="external">&larr; Back to Login page</a></p>
 
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
       <script src="js/index.js"></script>
