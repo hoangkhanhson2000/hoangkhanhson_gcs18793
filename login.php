@@ -1,55 +1,36 @@
-<?php
-session_start();
-?>
+<!DOCTYPE html>
 <html>
-<head>
-	<title>LOGIN PAGE</title>
-	<meta charset="utf-8">
-</head>
-<body>
-<?php
-	
-	require_once("config.php");
+   <head>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   </head>
+   
+   <body>
+      <h3 style="text-align: center;">LOGIN</h3>
+      
+      <form id="frm-login">
+         <table style="margin-left: auto; margin-right: auto;">
+            <tr>
+               <td>Username:</td>
+               <td><input type="email" name="username" id="username" required></td>
+            </tr>
 
-	if (isset($_POST["btn_submit"])) {
-		$username = $_POST["username"];
-		$password = $_POST["password"];
-		$query="SELECT *FROM account WHERE username = $username";
-		$result = pg_query($query);
-		if ($result) {
-			$link_password =pg_result ($result, 0, "password");
-			if ($link_password == $password) {
-				$msg = "Login sucess";
-				$_SESSION['username'] = $username;
-				header('Location: index.php');
-				}
-				}
-				else{
-				$msg ="no name in our database";
-				}
-				pg_close($link);
-				}
-				echo $msg;
-?>
-	<form method="POST" action="login.php">
-	<fieldset>
-	    <legend>Login</legend>
-	    	<table>
-	    		<tr>
-	    			<td>Username</td>
-	    			<td><input type="text" name="username" size="30"></td>
-	    		</tr>
-	    		<tr>
-	    			<td>Password</td>
-	    			<td><input type="password" name="password" size="30"></td>
-	    		</tr>
-	    		<tr>
-	    			<td colspan="2" align="center"> <input name="btn_submit" type="submit" value="Đăng nhập"></td>
-	    		</tr>
-				
-	    	</table>
-			<p>Don't have an account? <a href="register.php">Sign up now</a>.</p>
-  </fieldset>
-  </form>
-</body>
+            <tr>
+               <td>Password:</td>
+               <td><input type="password" name="password" id="password" required></td>
+            </tr>
+
+            <tr style="text-align: center;">
+               <td colspan="2">
+                  <br>
+                  <input type="submit" value="Login">
+               </td>
+            </tr>
+         </table>
+      </form>
+
+      <p style="text-align: center;">Don't have an account? Click <a href="create_account.html" rel="external">here</a> to create an account.</p>
+
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+      <script src="../js/index.js"></script>
+   </body>
 </html>
