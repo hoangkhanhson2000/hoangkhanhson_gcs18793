@@ -74,9 +74,9 @@ echo json_encode(array('success' => $success));
          </table>
       </form>
 
-      <p style="text-align: center;"><a href="login.html" rel="external">&larr; Back to Login page</a></p>
+      <p style="text-align: center;"><a href="login.php" rel="external">&larr; Back to Login page</a></p>
 
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-      <script src="../js/index.js"></script>
+      <script src="js/index.js"></script>
    </body>
 </html>
