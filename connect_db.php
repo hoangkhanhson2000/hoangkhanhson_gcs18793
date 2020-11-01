@@ -2,11 +2,11 @@
 /*
 * Define PostgreSQL database server connect parameters.
 */
-define('PG_HOST', 'ec2-50-17-197-184.compute-1.amazonaws.com');
+define('PG_HOST', 'ec2-184-73-209-230.compute-1.amazonaws.com');
 define('PG_PORT', 5432);
-define('PG_DATABASE', 'd9evuerg8cqfle');
-define('PG_USER', 'vuegshccgpklsh');
-define('PG_PASSWORD', '3aea04ac88596fa1500616727c3564ce57eec62b6e265eb51078727a5bf41127');
+define('PG_DATABASE', 'd35915da8p1v65');
+define('PG_USER', 'mtycxjjccxmeee');
+define('PG_PASSWORD', 'f0dd25aaa62a3a7a83d3934915c681f6ddfac747814e5a3668945ea34017c6ce');
 define('ERROR_ON_CONNECT_FAILED', 'Connection failed!');
 
 /*
