@@ -28,9 +28,9 @@
          </table>
       </form>
 
-      <p style="text-align: center;">Don't have an account? Click <a href="create_account.html" rel="external">here</a> to create an account.</p>
+      <p style="text-align: center;">Don't have an account? Click <a href="create_account.php" rel="external">here</a> to create an account.</p>
 
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-      <script src="../js/index.js"></script>
+      <script src="js/index.js"></script>
    </body>
 </html>
