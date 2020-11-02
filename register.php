@@ -6,7 +6,7 @@ $db = getDB();
 $username = $_POST['username'];
 $password = $_POST['password'];
 $password = password_hash($password, PASSWORD_DEFAULT); // Encrypt the password.
-$lname = $_POST['name'];
+$name = $_POST['name'];
 $age = intval($_POST['age']);
 $success = 0;
 
@@ -19,7 +19,7 @@ if ($db) {
 
     if( isset($username) && isset($password) && isset($age) ) {
         $query = "INSERT INTO account (username, password, firstname, lastname, age)
-                  VALUES ('$username', '$password', '$name', $age);";
+                  VALUES  ('".$username."', '".$password."', '".$name."', '".$age."')";
         pg_query($query);
         $success = 1;
     }
@@ -27,4 +27,5 @@ if ($db) {
 }
 
 echo json_encode(array('success' => $success));
+echo "successful signup"
 ?>
